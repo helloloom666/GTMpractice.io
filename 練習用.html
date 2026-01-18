@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM練習用ショップ | こだわりミカン</title>
+    
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
+        header { background-color: #ff9800; color: white; padding: 1rem; text-align: center; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        
+        /* 商品カードのスタイル */
+        .product-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .product-card { background: white; border: 1px solid #ddd; padding: 1rem; flex: 1; min-width: 200px; border-radius: 8px; text-align: center; }
+        .price { font-size: 1.2rem; font-weight: bold; color: #e91e63; }
+        
+        /* ボタンのスタイル（GTM練習用にクラスを分けています） */
+        button { cursor: pointer; padding: 10px 20px; border: none; border-radius: 4px; font-size: 1rem; margin-top: 10px; }
+        .btn-cart { background-color: #4caf50; color: white; } /* カート追加用 */
+        .btn-detail { background-color: #2196f3; color: white; } /* 詳細を見る用 */
+        
+        /* フォームのスタイル */
+        .contact-section { background: white; padding: 2rem; margin-top: 2rem; border-radius: 8px; }
+        input, textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+        .btn-submit { background-color: #333; color: white; width: 100%; }
+
+        /* フッター */
+        footer { text-align: center; margin-top: 3rem; padding: 1rem; font-size: 0.8rem; color: #666; }
+        .line-link { color: #06c755; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍊 こだわりミカン直売所</h1>
+        <p>GTM練習用のデモサイトです</p>
+    </header>
+
+    <div class="container">
+        <h2>おすすめ商品</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <h3>極甘ミカン（3kg）</h3>
+                <p class="price">¥2,980</p>
+                <button id="product-a-detail" class="btn-detail">詳細を見る</button>
+                <button class="btn-cart" data-id="1001" data-name="mikan-3kg" data-price="2980">カートに入れる</button>
+            </div>
+
+            <div class="product-card">
+                <h3>訳ありミカン（5kg）</h3>
+                <p class="price">¥1,980</p>
+                <button id="product-b-detail" class="btn-detail">詳細を見る</button>
+                <button class="btn-cart" data-id="1002" data-name="mikan-5kg-b" data-price="1980">カートに入れる</button>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>お問い合わせ</h2>
+            <form id="contact-form" action="#" onsubmit="alert('送信完了！(GTMでForm Submitを検知できます)'); return false;">
+                <label>お名前</label>
+                <input type="text" name="username" placeholder="山田 太郎">
+                <label>メールアドレス</label>
+                <input type="email" name="email" placeholder="test@example.com">
+                <button type="submit" class="btn-submit">送信する</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            お問い合わせは
+            <a href="https://line.me/ti/p/example" class="line-link" target="_blank">LINE公式アカウント</a>
+            から
+        </p>
+        <p>&copy; 2026 GTM Practice Shop</p>
+    </footer>
+
+    <script>
+        // カートボタンを押した時の擬似的な動作（dataLayerの練習用）
+        const cartButtons = document.querySelectorAll('.btn-cart');
+        cartButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = this.getAttribute('data-price');
+                
+                alert(name + ' をカートに入れました！\n(ここでdataLayer.pushを実行する練習ができます)');
+                
+                // ★上級編: ここにdataLayer.pushを書くと「eコマース計測」の練習になります
+                // window.dataLayer = window.dataLayer || [];
+                // window.dataLayer.push({
+                //   'event': 'add_to_cart',
+                //   'ecommerce': { ... }
+                // });
+            });
+        });
+    </script>
+</body>
+</html>
